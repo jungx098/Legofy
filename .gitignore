@@ -60,3 +60,6 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# Visual companion session files
+.superpowers/
