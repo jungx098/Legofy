@@ -1,6 +1,7 @@
 '''Unit tests for legofy'''
 # They can be run individually, for example:
 # nosetests tests.test_legofy:Create.test_legofy_image
+import json
 import os
 import tempfile
 import unittest
@@ -122,6 +123,24 @@ class Failures(unittest.TestCase):
         self.assertFalse(os.path.exists(fake_path),
                          "Should not find image : {0}".format(fake_path))
         self.assertRaises(SystemExit, legofy.main, fake_path)
+
+
+class DocsAssets(unittest.TestCase):
+    '''The GitHub Pages copies must match the Python package.'''
+
+    def test_palettes_json_matches_package(self):
+        path = os.path.join(TEST_DIR, '..', 'docs', 'palettes.json')
+        with open(path) as handle:
+            documented = json.load(handle)
+        self.assertEqual(documented, legofy.palettes.legos())
+
+    def test_brick_png_matches_package(self):
+        docs_brick = os.path.join(TEST_DIR, '..', 'docs', '1x1.png')
+        package_brick = os.path.join(
+            TEST_DIR, '..', 'legofy', 'assets', 'bricks', '1x1.png')
+        with open(docs_brick, 'rb') as left, open(package_brick, 'rb') as right:
+            self.assertEqual(left.read(), right.read())
+
 
 if __name__ == '__main__':
     unittest.main()
