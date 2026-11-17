@@ -6,7 +6,6 @@ import {
   effectivePalette
 } from './legofy.js';
 
-const controls = document.querySelector('#controls');
 const photoInput = document.querySelector('#photo');
 const bricksInput = document.querySelector('#bricks');
 const brickCount = document.querySelector('#brick-count');
@@ -137,8 +136,10 @@ function onDownload() {
     const link = document.createElement('a');
     link.href = url;
     link.download = legoFilename(sourceName);
+    document.body.appendChild(link);
     link.click();
-    URL.revokeObjectURL(url);
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
   }, 'image/png');
 }
 
