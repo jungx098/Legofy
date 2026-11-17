@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Legofy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="bar">
+    <h1>Legofy</h1>
+    <p>Still photos stay in this browser.</p>
+  </header>
+  <form class="controls" id="controls">
+    <label>Photo <input id="photo" type="file" accept="image/jpeg,image/png,image/webp"></label>
+    <label>Bricks <input id="bricks" type="range" min="10" max="80" value="40"> <span id="brick-count">40</span></label>
+    <label>Palette
+      <select id="palette">
+        <option value="">Full color</option>
+        <option value="solid">Solid</option>
+        <option value="transparent">Transparent</option>
+        <option value="effects">Effects</option>
+        <option value="mono">Mono</option>
+        <option value="all">All</option>
+      </select>
+    </label>
+    <label><input id="dither" type="checkbox"> Dither</label>
+    <button id="download" type="button" disabled>Download PNG</button>
+  </form>
+  <p class="status" id="status" role="status"></p>
+  <div class="stage">
+    <section class="pane">
+      <h2>Original</h2>
+      <div class="frame"><img id="original" alt=""></div>
+    </section>
+    <section class="pane">
+      <h2>Bricks</h2>
+      <div class="frame"><canvas id="result"></canvas></div>
+    </section>
+  </div>
+  <script type="module" src="page.js"></script>
+</body>
+</html>
